@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { ThemeProvider } from 'emotion-theming';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { getTheme } from 'commons/theme';
-import { Icon } from 'commons/fragments';
 import { Theme } from 'commons/types';
+import { DemoNavigator, DEMO_NAVIGATOR_PATH } from 'features/Demo';
 
 import { useAppStore } from './app.store';
 
@@ -21,16 +22,13 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider theme={getTheme({ isDark: darkTheme })}>
-      <Container>
-        <Icon name={'add'} />
-        <Icon name={'check'} />
-        <Icon name={'close'} />
-        <Icon name={'down-arrow'} />
-        <Icon name={'pen'} />
-        <Icon name={'play'} />
-        <Icon name={'rewind'} />
-        <Icon name={'step'} />
-      </Container>
+      <Router>
+        <Switch>
+          <Container>
+            <Route path={DEMO_NAVIGATOR_PATH} component={DemoNavigator} />
+          </Container>
+        </Switch>
+      </Router>
     </ThemeProvider>
   );
 };
